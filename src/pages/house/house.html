@@ -1,0 +1,33 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>House of Westeros</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <div *ngIf="!auth.isAuthenticated()">
+    <button ion-button block color="primary" (click)="auth.login()">Log In</button>
+  </div>
+
+  <div *ngIf="auth.isAuthenticated()">
+    <button ion-button block color="primary" (click)="auth.logout()">Logout, {{ auth.user.nickname }}</button>
+    <ion-list>
+      <ion-item *ngFor="let item of items">
+        <ion-card>
+          <img src="{{ item.avatar }}">
+          <ion-card-content>
+            <ion-card-title class="card-title">
+              {{ item.title }}
+            </ion-card-title>
+            <p>
+              <ion-badge> {{ item.member }} </ion-badge>
+            </p>
+          </ion-card-content>
+        </ion-card>
+      </ion-item>
+    </ion-list>
+  </div>
+</ion-content>
